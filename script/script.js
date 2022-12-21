@@ -18,13 +18,15 @@ const hoursElement = document.getElementById("hours");
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
 
+
 //! dichiaro la funzione
 function countdown() {
+
     //! data di oggi (automatica)
-    let now = new Date();
+    const now = new Date();
 
     //! data futura (per calcolare differenza)
-    let targetDate = new Date(2022, 11, 25);
+    const targetDate = new Date("2022-12-25");
 
     //! calcolo differenza (in millisecondi) 
     let remainTime = targetDate - now;
@@ -32,7 +34,7 @@ function countdown() {
     //! ottengo (secondi,minuti,ore,giorni) senza decimali
     let seconds = Math.floor(remainTime / 1000);
     let minutes = Math.floor(seconds / 60);
-    let hours = Math.floor(minutes / 60);
+    let hours = Math.floor(minutes / 60 - 1);
     let days = Math.floor(hours / 24);
 
     //! Ottengo il modulo 
@@ -41,20 +43,17 @@ function countdown() {
     seconds %= 60;
 
     //! aggiungo lo 0 se il numero è minore di 10
-    days = days < 10 ? '0' + days : days;
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
+    days = days < 10 ? "0" + days : days;
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
     //! stampo in pagina
     daysElement.innerText = days;
     hoursElement.innerText = hours;
     minutesElement.innerText = minutes;
     secondsElement.innerText = seconds;
-
-    //! imposto intervallo della funzione countdown (refresh)
-    setInterval(countdown, 1000);
-
 };
-//! invoco la funzione
+//! invoco la funzione, imposto intervallo della funzione countdown (refresh)
 countdown();
+setInterval(countdown, 1000);
